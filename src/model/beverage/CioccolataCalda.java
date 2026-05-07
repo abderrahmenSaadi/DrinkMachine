@@ -1,4 +1,4 @@
-package Drink-Machine.src.model.beverage;
+package DrinkMachine.src.model.beverage;
 
 public class CioccolataCalda implements Bevanda {
 

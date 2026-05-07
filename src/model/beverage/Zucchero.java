@@ -1,4 +1,4 @@
-package Drink-Machine.src.model.beverage;
+package DrinkMachine.src.model.beverage;
 
 public class Zucchero extends Decorator {
 
@@ -15,4 +15,4 @@ public class Zucchero extends Decorator {
     public double getPrezzo() {
         return bevanda.getPrezzo() + 0.05;
     }
-}   
+}

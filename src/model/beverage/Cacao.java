@@ -1,4 +1,4 @@
-package Drink-Machine.src.model.beverage;
+package DrinkMachine.src.model.beverage;
 
 public class Cacao extends Decorator {
 
