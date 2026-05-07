@@ -1,50 +1,51 @@
-public class Utente{
+package model.user;
 
-    private String nomeUtente;
-    private String passwdUtente;
-    private double creditoUtente;
-    private boolean isAdimn;
+public class Utente {
 
-    public Utente(String nomeUtente, String passwdUtente, double creditoUtente, boolean isAdimn){
-        this.nomeUtente = nomeUtente;
-        this.passwdUtente = passwdUtente;
-        this.creditoUtente = creditoUtente;
-        this.isAdimn = isAdimn;
+    private int id;
+
+    private String username;
+
+    private String password;
+
+    private String ruolo;
+
+    public Utente(
+            int id,
+            String username,
+            String password,
+            String ruolo
+    ) {
+
+        this.id = id;
+
+        this.username = username;
+
+        this.password = password;
+
+        this.ruolo = ruolo;
     }
 
-    public String getNomeUtente() {
-        return nomeUtente;
+    public int getId() {
+        return id;
     }
 
-    public void setNomeUtente(String nomeUtente) {
-        this.nomeUtente = nomeUtente;
+    public String getUsername() {
+        return username;
     }
 
-    public String getPasswdUtente() {
-        return passwdUtente;
-    }
-    public void setPasswdUtente(String passwdUtente) {
-        this.passwdUtente = passwdUtente;
+    public String getPassword() {
+        return password;
     }
 
-    public double getCreditoUtente() {
-        return creditoUtente;
+    public String getRuolo() {
+        return ruolo;
     }
 
-    public boolean isAdimn() {
-        return isAdimn;
+    public boolean isAdmin() {
+
+        return ruolo.equalsIgnoreCase(
+                "ADMIN"
+        );
     }
-
-    public void aggiungiCredito(double creditoAggiunto){
-        if(isAdimn){
-            System.out.println("Sei un utente Adimn e puoi comprare quello che vuoi " );
-            return;
-        }
-        this.creditoUtente += creditoAggiunto;
-        System.out.println("Credito aggiunto: " + creditoAggiunto);
-        System.out.println("Totale Credito: " + this.creditoUtente);
-    }
-
-
-
 }

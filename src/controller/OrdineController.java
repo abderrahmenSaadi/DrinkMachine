@@ -1,9 +1,14 @@
 package controller;
 
 import dao.OrdineDAO;
+
 import model.beverage.*;
+
 import model.order.GestoreOrdini;
 import model.order.Ordine;
+
+import model.user.Utente;
+
 import view.ConsoleView;
 
 public class OrdineController {
@@ -14,13 +19,19 @@ public class OrdineController {
 
     private OrdineDAO ordineDAO;
 
+    private Utente utente;
+
     public OrdineController(
-            ConsoleView view
+            ConsoleView view,
+            Utente utente
     ) {
 
         this.view = view;
 
-        ordineDAO = new OrdineDAO();
+        this.utente = utente;
+
+        ordineDAO =
+                new OrdineDAO();
     }
 
     public void creaCaffe() {
@@ -165,6 +176,34 @@ public class OrdineController {
                 );
     }
 
+    public void aggiungiDecoratoreCustom(
+            String nome,
+            double prezzo
+    ) {
+
+        if (bevandaCorrente == null) {
+
+            view.mostraMessaggio(
+                    "Crea prima una bevanda."
+            );
+
+            return;
+        }
+
+        bevandaCorrente =
+                new DecoratoreCustom(
+                        bevandaCorrente,
+                        nome,
+                        prezzo
+                );
+
+        view.mostraMessaggio(
+                "Decoratore custom '"
+                        + nome
+                        + "' aggiunto."
+        );
+    }
+
     public void visualizzaBevanda() {
 
         if (bevandaCorrente == null) {
@@ -200,7 +239,8 @@ public class OrdineController {
         Ordine ordine =
                 new Ordine(
                         idOrdine,
-                        bevandaCorrente
+                        bevandaCorrente,
+                        utente
                 );
 
         GestoreOrdini

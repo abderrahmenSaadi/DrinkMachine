@@ -1,6 +1,7 @@
 package model.order;
 
 import model.beverage.Bevanda;
+import model.user.Utente;
 
 public class Ordine {
 
@@ -8,14 +9,19 @@ public class Ordine {
 
     private Bevanda bevanda;
 
+    private Utente utente;
+
     public Ordine(
             int id,
-            Bevanda bevanda
+            Bevanda bevanda,
+            Utente utente
     ) {
 
         this.id = id;
 
         this.bevanda = bevanda;
+
+        this.utente = utente;
     }
 
     public int getId() {
@@ -24,5 +30,19 @@ public class Ordine {
 
     public Bevanda getBevanda() {
         return bevanda;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public double getTotale() {
+
+        if (utente.isAdmin()) {
+
+            return 0.0;
+        }
+
+        return bevanda.getPrezzo();
     }
 }

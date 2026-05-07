@@ -122,6 +122,7 @@ public class OrdineDAO {
                         2,
                         ingredienteId
                 );
+                
 
                 statement.executeUpdate();
 

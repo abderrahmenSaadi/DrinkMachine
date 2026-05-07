@@ -13,7 +13,14 @@ public class ReceptionistObserver
         );
 
         System.out.println(
-                "Ordine #" + ordine.getId()
+                "Ordine #" +
+                ordine.getId()
+        );
+
+        System.out.println(
+                "Cliente: " +
+                ordine.getUtente()
+                        .getUsername()
         );
 
         System.out.println(
@@ -21,10 +28,18 @@ public class ReceptionistObserver
                         .getDescrizione()
         );
 
-        System.out.println(
-                "Totale ordine: €"
-                + ordine.getBevanda()
-                        .getPrezzo()
-        );
+        if (ordine.getUtente().isAdmin()) {
+
+            System.out.println(
+                    "ADMIN ORDER -> GRATIS"
+            );
+
+        } else {
+
+            System.out.println(
+                    "Totale ordine: €" +
+                    ordine.getTotale()
+            );
+        }
     }
 }
