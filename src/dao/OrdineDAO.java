@@ -46,18 +46,10 @@ public class OrdineDAO {
                             PreparedStatement.RETURN_GENERATED_KEYS
                     );
 
-            double totale = 0;
-
-            for (Bevanda bevanda :
-                    ordine.getBevande()) {
-
-                totale +=
-                        bevanda.getPrezzo();
-            }
-
             statement.setDouble(
                     1,
-                    totale
+                    ordine.getBevanda()
+                            .getPrezzo()
             );
 
             statement.executeUpdate();
@@ -73,20 +65,19 @@ public class OrdineDAO {
                         keys.getInt(1);
             }
 
-            for (Bevanda bevanda :
-                    ordine.getBevande()) {
+            Bevanda bevanda =
+                    ordine.getBevanda();
 
-                int bevandaId =
-                        bevandaDAO.salvaBevanda(
-                                bevanda,
-                                ordineId
-                        );
+            int bevandaId =
+                    bevandaDAO.salvaBevanda(
+                            bevanda,
+                            ordineId
+                    );
 
-                salvaIngredientiBevanda(
-                        bevandaId,
-                        bevanda
-                );
-            }
+            salvaIngredientiBevanda(
+                    bevandaId,
+                    bevanda
+            );
 
             System.out.println(
                     "Ordine salvato nel database."

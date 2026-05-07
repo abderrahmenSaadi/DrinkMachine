@@ -6,12 +6,9 @@ import model.order.GestoreOrdini;
 import model.order.Ordine;
 import view.ConsoleView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class OrdineController {
 
-    private List<Bevanda> bevandeCorrenti;
+    private Bevanda bevandaCorrente;
 
     private ConsoleView view;
 
@@ -24,173 +21,153 @@ public class OrdineController {
         this.view = view;
 
         ordineDAO = new OrdineDAO();
-
-        bevandeCorrenti =
-                new ArrayList<>();
     }
 
     public void creaCaffe() {
 
-        bevandeCorrenti.add(
-                new Caffe()
-        );
+        if (bevandaCorrente != null) {
+
+            view.mostraMessaggio(
+                    "Conferma prima l'ordine corrente."
+            );
+
+            return;
+        }
+
+        bevandaCorrente =
+                new Caffe();
 
         view.mostraMessaggio(
-                "Caffe aggiunto all'ordine."
+                "Caffe creato."
         );
     }
 
     public void creaTe() {
 
-        bevandeCorrenti.add(
-                new Te()
-        );
+        if (bevandaCorrente != null) {
+
+            view.mostraMessaggio(
+                    "Conferma prima l'ordine corrente."
+            );
+
+            return;
+        }
+
+        bevandaCorrente =
+                new Te();
 
         view.mostraMessaggio(
-                "Te aggiunto all'ordine."
+                "Te creato."
         );
     }
 
     public void creaCioccolata() {
 
-        bevandeCorrenti.add(
-                new CioccolataCalda()
-        );
+        if (bevandaCorrente != null) {
+
+            view.mostraMessaggio(
+                    "Conferma prima l'ordine corrente."
+            );
+
+            return;
+        }
+
+        bevandaCorrente =
+                new CioccolataCalda();
 
         view.mostraMessaggio(
-                "Cioccolata aggiunta all'ordine."
+                "Cioccolata creata."
         );
     }
 
-    public void aggiungiLatte(
-            int indice
-    ) {
+    public void aggiungiLatte() {
 
-        if (!indiceValido(indice)) {
-            return;
-        }
-
-        Bevanda bevanda =
-                bevandeCorrenti.get(indice);
-
-        bevanda =
-                new Latte(bevanda);
-
-        bevandeCorrenti.set(
-                indice,
-                bevanda
-        );
-    }
-
-    public void aggiungiZucchero(
-            int indice
-    ) {
-
-        if (!indiceValido(indice)) {
-            return;
-        }
-
-        Bevanda bevanda =
-                bevandeCorrenti.get(indice);
-
-        bevanda =
-                new Zucchero(bevanda);
-
-        bevandeCorrenti.set(
-                indice,
-                bevanda
-        );
-    }
-
-    public void aggiungiPanna(
-            int indice
-    ) {
-
-        if (!indiceValido(indice)) {
-            return;
-        }
-
-        Bevanda bevanda =
-                bevandeCorrenti.get(indice);
-
-        bevanda =
-                new Panna(bevanda);
-
-        bevandeCorrenti.set(
-                indice,
-                bevanda
-        );
-    }
-
-    public void aggiungiCannella(
-            int indice
-    ) {
-
-        if (!indiceValido(indice)) {
-            return;
-        }
-
-        Bevanda bevanda =
-                bevandeCorrenti.get(indice);
-
-        bevanda =
-                new Cannella(bevanda);
-
-        bevandeCorrenti.set(
-                indice,
-                bevanda
-        );
-    }
-
-    public void aggiungiCacao(
-            int indice
-    ) {
-
-        if (!indiceValido(indice)) {
-            return;
-        }
-
-        Bevanda bevanda =
-                bevandeCorrenti.get(indice);
-
-        bevanda =
-                new Cacao(bevanda);
-
-        bevandeCorrenti.set(
-                indice,
-                bevanda
-        );
-    }
-
-    private boolean indiceValido(
-            int indice
-    ) {
-
-        if (bevandeCorrenti.isEmpty()) {
+        if (bevandaCorrente == null) {
 
             view.mostraMessaggio(
-                    "Nessuna bevanda presente."
+                    "Crea prima una bevanda."
             );
 
-            return false;
+            return;
         }
 
-        if (indice < 0 ||
-            indice >= bevandeCorrenti.size()) {
-
-            view.mostraMessaggio(
-                    "Indice non valido."
-            );
-
-            return false;
-        }
-
-        return true;
+        bevandaCorrente =
+                new Latte(
+                        bevandaCorrente
+                );
     }
 
-    public void visualizzaBevande() {
+    public void aggiungiZucchero() {
 
-        if (bevandeCorrenti.isEmpty()) {
+        if (bevandaCorrente == null) {
+
+            view.mostraMessaggio(
+                    "Crea prima una bevanda."
+            );
+
+            return;
+        }
+
+        bevandaCorrente =
+                new Zucchero(
+                        bevandaCorrente
+                );
+    }
+
+    public void aggiungiPanna() {
+
+        if (bevandaCorrente == null) {
+
+            view.mostraMessaggio(
+                    "Crea prima una bevanda."
+            );
+
+            return;
+        }
+
+        bevandaCorrente =
+                new Panna(
+                        bevandaCorrente
+                );
+    }
+
+    public void aggiungiCannella() {
+
+        if (bevandaCorrente == null) {
+
+            view.mostraMessaggio(
+                    "Crea prima una bevanda."
+            );
+
+            return;
+        }
+
+        bevandaCorrente =
+                new Cannella(
+                        bevandaCorrente
+                );
+    }
+
+    public void aggiungiCacao() {
+
+        if (bevandaCorrente == null) {
+
+            view.mostraMessaggio(
+                    "Crea prima una bevanda."
+            );
+
+            return;
+        }
+
+        bevandaCorrente =
+                new Cacao(
+                        bevandaCorrente
+                );
+    }
+
+    public void visualizzaBevanda() {
+
+        if (bevandaCorrente == null) {
 
             view.mostraMessaggio(
                     "Nessuna bevanda presente."
@@ -199,60 +176,49 @@ public class OrdineController {
             return;
         }
 
-        for (int i = 0;
-             i < bevandeCorrenti.size();
-             i++) {
-
-            Bevanda bevanda =
-                    bevandeCorrenti.get(i);
-
-            System.out.println(
-                    "[" + i + "] "
-                    + bevanda.getDescrizione()
-                    + " - €"
-                    + bevanda.getPrezzo()
-            );
-        }
+        view.mostraBevanda(
+                bevandaCorrente
+        );
     }
 
-public void confermaOrdine() {
+    public void confermaOrdine() {
 
-    if (bevandeCorrenti.isEmpty()) {
+        if (bevandaCorrente == null) {
 
-        view.mostraMessaggio(
-                "Nessuna bevanda presente."
+            view.mostraMessaggio(
+                    "Nessuna bevanda presente."
+            );
+
+            return;
+        }
+
+        int idOrdine =
+                GestoreOrdini
+                        .getIstanza()
+                        .generaIdOrdine();
+
+        Ordine ordine =
+                new Ordine(
+                        idOrdine,
+                        bevandaCorrente
+                );
+
+        GestoreOrdini
+                .getIstanza()
+                .aggiungiOrdine(
+                        ordine
+                );
+
+        ordineDAO.salvaOrdine(
+                ordine
         );
 
-        return;
+        view.mostraMessaggio(
+                "Ordine confermato."
+        );
+
+        bevandaCorrente = null;
     }
-
-    int idOrdine =
-            GestoreOrdini
-                    .getIstanza()
-                    .generaIdOrdine();
-
-    Ordine ordine =
-            new Ordine(
-                    idOrdine,
-                    new ArrayList<>(
-                            bevandeCorrenti
-                    )
-            );
-
-    GestoreOrdini
-            .getIstanza()
-            .aggiungiOrdine(ordine);
-
-    ordineDAO.salvaOrdine(
-            ordine
-    );
-
-    view.mostraMessaggio(
-            "Ordine confermato."
-    );
-
-    bevandeCorrenti.clear();
-}
 
     public void mostraStorico() {
 

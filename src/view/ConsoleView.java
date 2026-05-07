@@ -20,17 +20,8 @@ public class ConsoleView {
             Bevanda bevanda
     ) {
 
-        if (bevanda == null) {
-
-            System.out.println(
-                    "Nessuna bevanda selezionata."
-            );
-
-            return;
-        }
-
         System.out.println(
-                "\nBevanda corrente:"
+                "\n=== BEVANDA ==="
         );
 
         System.out.println(
@@ -48,7 +39,7 @@ public class ConsoleView {
     ) {
 
         System.out.println(
-                "\n=== STORICO ORDINI ==="
+                "\n=== STORICO ==="
         );
 
         for (Ordine ordine : ordini) {
@@ -58,25 +49,15 @@ public class ConsoleView {
                     + ordine.getId()
             );
 
-            double totale = 0;
-
-            for (Bevanda bevanda :
-                    ordine.getBevande()) {
-
-                System.out.println(
-                        "- "
-                        + bevanda.getDescrizione()
-                        + " -> €"
-                        + bevanda.getPrezzo()
-                );
-
-                totale +=
-                        bevanda.getPrezzo();
-            }
+            System.out.println(
+                    ordine.getBevanda()
+                            .getDescrizione()
+            );
 
             System.out.println(
-                    "Totale ordine: €"
-                    + totale
+                    "Totale: €"
+                    + ordine.getBevanda()
+                            .getPrezzo()
             );
         }
     }

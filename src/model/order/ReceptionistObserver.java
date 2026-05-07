@@ -1,7 +1,5 @@
 package model.order;
 
-import model.beverage.Bevanda;
-
 public class ReceptionistObserver
         implements OrdineObserver {
 
@@ -18,25 +16,15 @@ public class ReceptionistObserver
                 "Ordine #" + ordine.getId()
         );
 
-        double totale = 0;
-
-        for (Bevanda bevanda :
-                ordine.getBevande()) {
-
-            System.out.println(
-                    "- "
-                    + bevanda.getDescrizione()
-                    + " -> €"
-                    + bevanda.getPrezzo()
-            );
-
-            totale +=
-                    bevanda.getPrezzo();
-        }
+        System.out.println(
+                ordine.getBevanda()
+                        .getDescrizione()
+        );
 
         System.out.println(
                 "Totale ordine: €"
-                + totale
+                + ordine.getBevanda()
+                        .getPrezzo()
         );
     }
 }
