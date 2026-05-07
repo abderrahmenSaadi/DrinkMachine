@@ -1,5 +1,4 @@
-package DrinkMachine.src.model.beverage;
-
+package beverage;
 
 public class Caffe implements Bevanda {
 
