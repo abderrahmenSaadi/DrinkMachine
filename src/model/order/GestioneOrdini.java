@@ -1,5 +1,7 @@
+package model.order;
 import java.util.ArrayList;
-
+import java.util.List;
+import model.beverage.Bevanda;
 // SINGLETON creo un unica istanza per tutta la durata del programma
 public class GestioneOrdini {
 

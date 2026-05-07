@@ -1,5 +1,4 @@
-package DrinkMachine.src.model.beverage;
-
+package model.beverage;
 public abstract class Decorator implements Bevanda {
 
     protected Bevanda bevanda;

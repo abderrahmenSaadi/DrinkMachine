@@ -1,4 +1,4 @@
-package DrinkMachine.src.model.beverage;
+package model.beverage;
 
 
 public class Latte extends Decorator {

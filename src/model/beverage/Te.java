@@ -1,5 +1,5 @@
 // src/model/bevanda/Te.java
-package model.bevanda;
+package model.beverage;
 
 public class Te implements Bevanda {
 
@@ -9,7 +9,7 @@ public class Te implements Bevanda {
     }
 
     @Override
-    public double getCosto() {
+    public double getPrezzo() {
         return 1.50;
     }
 }

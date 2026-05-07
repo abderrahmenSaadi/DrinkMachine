@@ -1,6 +1,6 @@
-package DrinkMachine.src.model.beverage;
+package model.beverage;
 
-interface Bevanda {
+public interface Bevanda {
 
     String getDescrizione();
 
