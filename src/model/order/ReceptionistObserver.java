@@ -1,9 +1,14 @@
 package model.order;
 
-public class ReceptionistObserver implements OrdineObserver {
+import model.beverage.Bevanda;
+
+public class ReceptionistObserver
+        implements OrdineObserver {
 
     @Override
-    public void aggiorna(Ordine ordine) {
+    public void aggiorna(
+            Ordine ordine
+    ) {
 
         System.out.println(
                 "\n[RECEPTION] Nuovo ordine ricevuto"
@@ -13,13 +18,25 @@ public class ReceptionistObserver implements OrdineObserver {
                 "Ordine #" + ordine.getId()
         );
 
-        System.out.println(
-                ordine.getBevanda().getDescrizione()
-        );
+        double totale = 0;
+
+        for (Bevanda bevanda :
+                ordine.getBevande()) {
+
+            System.out.println(
+                    "- "
+                    + bevanda.getDescrizione()
+                    + " -> €"
+                    + bevanda.getPrezzo()
+            );
+
+            totale +=
+                    bevanda.getPrezzo();
+        }
 
         System.out.println(
-                "Prezzo: €" +
-                ordine.getBevanda().getPrezzo()
+                "Totale ordine: €"
+                + totale
         );
     }
 }

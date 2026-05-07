@@ -2,24 +2,29 @@ package model.order;
 
 import model.beverage.Bevanda;
 
+import java.util.List;
+
 public class Ordine {
 
     private int id;
 
-    private Bevanda bevanda;
+    private List<Bevanda> bevande;
 
-    public Ordine(int id, Bevanda bevanda) {
+    public Ordine(
+            int id,
+            List<Bevanda> bevande
+    ) {
 
         this.id = id;
 
-        this.bevanda = bevanda;
+        this.bevande = bevande;
     }
 
     public int getId() {
         return id;
     }
 
-    public Bevanda getBevanda() {
-        return bevanda;
+    public List<Bevanda> getBevande() {
+        return bevande;
     }
 }

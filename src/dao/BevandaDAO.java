@@ -39,7 +39,7 @@ public class BevandaDAO {
 
             statement.setDouble(
                     2,
-                    bevanda.getCosto()
+                    bevanda.getPrezzo()
             );
 
             statement.setInt(3, ordineId);

@@ -1,5 +1,7 @@
 package model.beverage;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Caffe implements Bevanda {
 
@@ -13,4 +15,9 @@ public class Caffe implements Bevanda {
         return 1.0;
     }
 
+    @Override
+    public List<String> getIngredienti() {
+
+        return new ArrayList<>();
+    }
 }

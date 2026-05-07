@@ -1,5 +1,8 @@
 package model.beverage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cacao extends Decorator {
 
     public Cacao(Bevanda bevanda) {
@@ -14,5 +17,18 @@ public class Cacao extends Decorator {
     @Override
     public double getPrezzo() {
         return bevanda.getPrezzo() + 0.10;
+    }
+
+    @Override
+    public List<String> getIngredienti() {
+
+        List<String> ingredienti =
+                new ArrayList<>(
+                        bevanda.getIngredienti()
+                );
+
+        ingredienti.add("Cacao");
+
+        return ingredienti;
     }
 }

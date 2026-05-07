@@ -1,7 +1,8 @@
 package dao;
 
 import database.ConnessioneDatabase;
-import model.order.*;
+import model.beverage.Bevanda;
+import model.order.Ordine;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,12 +24,18 @@ public class OrdineDAO {
                         .getIstanza()
                         .getConnessione();
 
-        bevandaDAO = new BevandaDAO();
+        bevandaDAO =
+                new BevandaDAO();
 
-        ingredienteDAO = new IngredienteDAO();
+        ingredienteDAO =
+                new IngredienteDAO();
     }
 
-    public void salvaOrdine(Ordine ordine) { String sql =
+    public void salvaOrdine(
+            Ordine ordine
+    ) {
+
+        String sql =
                 "INSERT INTO ordini(costo_totale) VALUES (?)";
 
         try {
@@ -39,66 +46,96 @@ public class OrdineDAO {
                             PreparedStatement.RETURN_GENERATED_KEYS
                     );
 
+            double totale = 0;
+
+            for (Bevanda bevanda :
+                    ordine.getBevande()) {
+
+                totale +=
+                        bevanda.getPrezzo();
+            }
+
             statement.setDouble(
                     1,
-                    ordine.getBevanda().getCosto()
+                    totale
             );
 
             statement.executeUpdate();
 
-            ResultSet keys = statement.getGeneratedKeys();
+            ResultSet keys =
+                    statement.getGeneratedKeys();
 
             int ordineId = -1;
 
             if (keys.next()) {
-                ordineId = keys.getInt(1);
+
+                ordineId =
+                        keys.getInt(1);
             }
 
-            int bevandaId =
-                    bevandaDAO.salvaBevanda(
-                            ordine.getBevanda(),
-                            ordineId
-                    );
+            for (Bevanda bevanda :
+                    ordine.getBevande()) {
 
-            salvaIngredientiBevanda(
-                    bevandaId,
-                    ordine.getBevanda()
-            ); System.out.println(
+                int bevandaId =
+                        bevandaDAO.salvaBevanda(
+                                bevanda,
+                                ordineId
+                        );
+
+                salvaIngredientiBevanda(
+                        bevandaId,
+                        bevanda
+                );
+            }
+
+            System.out.println(
                     "Ordine salvato nel database."
             );
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
     }
 
     private void salvaIngredientiBevanda(
             int bevandaId,
-            model.bevanda.Bevanda bevanda
+            Bevanda bevanda
     ) {
 
         String sql =
                 "INSERT INTO bevanda_ingredienti(bevanda_id, ingrediente_id) VALUES (?, ?)";
 
-        for (String nomeIngrediente : bevanda.getIngredienti()) {
+        for (String nomeIngrediente :
+                bevanda.getIngredienti()) {
 
             int ingredienteId =
-                    ingredienteDAO.getIdIngrediente(
-                            nomeIngrediente
-                    );
+                    ingredienteDAO
+                            .getIdIngrediente(
+                                    nomeIngrediente
+                            );
 
             try {
 
                 PreparedStatement statement =
-                        connessione.prepareStatement(sql);
+                        connessione.prepareStatement(
+                                sql
+                        );
 
-                statement.setInt(1, bevandaId);
+                statement.setInt(
+                        1,
+                        bevandaId
+                );
 
-                statement.setInt(2, ingredienteId);
+                statement.setInt(
+                        2,
+                        ingredienteId
+                );
 
                 statement.executeUpdate();
 
             } catch (SQLException e) {
+
                 e.printStackTrace();
             }
         }
