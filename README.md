@@ -1,2 +1,2 @@
-# Drink-Macine
+# DrinkMachine
 folder
